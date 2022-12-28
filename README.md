@@ -12,7 +12,9 @@
 
 - Complementos
 	- Microsfot Entity Framework
-
+	
+	
+Fuente: https://www.youtube.com/watch?v=0Gu56u71G18&ab_channel=Develoteca
  
 MVC:
  
@@ -21,7 +23,7 @@ Debe haber un equivalente de las clases de Controlles en Views:
 - Los metodos en Controllers/Home hacen referencia a los cshtml en Views/Home
 - En Views/Shared estan los templates que se usa en el proyecto por defecto (_Layout.cshtml)
 - Codigo embebido en el HTML se llama Razor
-Fuente: https://www.youtube.com/watch?v=0Gu56u71G18&ab_channel=Develoteca
+
 - Actualizar contenido en una parte de la vista cshtml con `@RenderBody()`
 - Crer Vista:
 	- Views/Home
