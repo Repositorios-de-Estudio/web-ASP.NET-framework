@@ -26,5 +26,13 @@ namespace RegistroEmpleados.Controllers
 
             return View();
         }
+
+        public ActionResult Mision()
+        {
+            // así se enlaza la vista Mision creada
+            // para ver agregar el ActionLink es la vista _Layout.cshtml
+            // <li>@Html.ActionLink("Mision", "Mision", "Home")</li>
+            return View();
+        }
     }
 }
