@@ -57,12 +57,16 @@ Para los datos de la BD:
 - Generar vistas y use a layout page
 - Para hacer que se memuestre la seccion Empleados:
 	- Views/Shared/_Layout
-	- Agregar ActionLink: ""
-
+	- Agregar ActionLink:  Nombre cualquiera, Metodo inicial del controlador, Controlador
+			- Metodo inicial: public ActionResult Index(){...}
+			- Controlador: tblEmpleadosController
+		- <li>@Html.ActionLink("Empleados", "Index", "tblEmpleados")</li>
+	- Para actualizar la conexion se puede desde: ModeloEmpresa.edmx > Actualizar Modelo de base de datos
 
 Otros:
 - Firewall local: Permitir aplicacion:
 	- Compartir archivos e imprsoras
 	- Enrutamiento y acceso remoto
 	- Escritorio remoto
-- Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion
+- Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion, esto se puede ver en el conextion string
+	- <connectionStrings><add name="EmpresaEntities" connectionString="metadata=res://*/ModeloEmpresa.csdl|res://*/ModeloEmpresa.ssdl|res://*/ModeloEmpresa.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.20\SERVER\SQLEXPRESS,1433;initial catalog=Empresa;persist security info=True;user id=bduserX;password=admin1234;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
