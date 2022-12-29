@@ -83,16 +83,98 @@ Otros:
 	
 	
 	
-	Agregar Correos en la BD y en codigo
-	- Agregar Correos, not null, unique
-	- Actualizar los stored procedures
-	- Actualizar el modelo de vista desde ModeloEmpresa.edmx
-	- Actualizar almacenamientos almacenados > Insert > PInsert, agregar variable Correos
-	- Actualizar controlador Controllers/tblEmpleadosController
-		- Agregar campo Correos en Create(): public ActionResult Create([Bind(Include = "ID,Nombres,Apellidos,Correos")]
-	- Actualizar vistas
-		- Views/tblEmpleados/Index
-			- Agregar columna Correos en "Table" en la vista: <th>  @Html.DisplayNameFor(model => model.Correos) </th>
-			- Agregar en el foreach los correos: <td>     @Html.DisplayFor(modelItem => item.Correos)    </td>
-		- Views/tblEmpleados/Create
-			- Agregar información faltante entre <div class="form-group"> </div> para  model.Correos
+Agregar Correos en la BD y en codigo
+- Agregar Correos, not null, unique
+- Actualizar los stored procedures
+- Actualizar el modelo de vista desde ModeloEmpresa.edmx
+- Actualizar almacenamientos almacenados > Insert > PInsert, agregar variable Correos
+- Actualizar controlador Controllers/tblEmpleadosController
+	- Agregar campo Correos en Create(): public ActionResult Create([Bind(Include = "ID,Nombres,Apellidos,Correos")]
+- Actualizar vistas
+	- Views/tblEmpleados/Index
+		- Agregar columna Correos en "Table" en la vista: <th>  @Html.DisplayNameFor(model => model.Correos) </th>
+		- Agregar en el foreach los correos: <td>     @Html.DisplayFor(modelItem => item.Correos)    </td>
+	- Views/tblEmpleados/Create
+		- Agregar información faltante entre <div class="form-group"> </div> para  model.Correos
+
+Agregar funcionalidad enviar correos
+Fuente: https://www.c-sharpcorner.com/UploadFile/sourabh_mishra1/sending-an-e-mail-using-Asp-Net-mvc/
+
+- Nueva clase: Models/MailModel 
+
+```
+    public class MailModel
+    {
+        public string From { get;set; }
+        public string To { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+    }
+```
+
+- Nuevo Controlador: Controllers/SendMailController.cs > MVC5 en blanco
+```
+        // GET: SendMail
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult Index(MailModel _objModelMail)
+        {
+            if (ModelState.IsValid)
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(_objModelMail.To);
+                mail.From = new MailAddress(_objModelMail.From);
+                mail.Subject = _objModelMail.Subject;
+                string Body = _objModelMail.Body;
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("username", "password"); // Enter seders User name and password  
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+                return View("Index", _objModelMail);
+            }
+            else
+            {
+                return View();
+            }
+        }
+```
+
+- Nueva vista: Views/SendMail - Vista MVC5 en blanco
+```
+@model RegistroEmpleados.Models.MailModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<fieldset>
+    <legend>
+        Send Email
+    </legend>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <p>From: </p>
+        <p>@Html.TextBoxFor(model => model.From)</p>
+        <p>To: </p>
+        <p>@Html.TextBoxFor(model => model.To)</p>
+        <p>Subject: </p>
+        <p>@Html.TextBoxFor(model => model.Subject)</p>
+        <p>Body: </p>
+        <p>@Html.TextAreaFor(model => model.Body)</p>
+        <input type="submit" value="Send" />
+    }
+</fieldset>
+```
+

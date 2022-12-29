@@ -1,0 +1,26 @@
+﻿@model RegistroEmpleados.Models.MailModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<fieldset>
+    <legend>
+        Send Email
+    </legend>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <p>From: </p>
+        <p>@Html.TextBoxFor(model => model.From)</p>
+        <p>To: </p>
+        <p>@Html.TextBoxFor(model => model.To)</p>
+        <p>Subject: </p>
+        <p>@Html.TextBoxFor(model => model.Subject)</p>
+        <p>Body: </p>
+        <p>@Html.TextAreaFor(model => model.Body)</p>
+        <input type="submit" value="Send" />
+    }
+</fieldset>
