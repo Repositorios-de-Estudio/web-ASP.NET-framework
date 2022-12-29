@@ -44,7 +44,7 @@ Conexion a BD - SQLServer2019:
 		- User: bduserX
 		- Password: admin1234
 		- BD: Empresa
-		- No, excluir datos confidenciales
+		- Si, incluir datos confidenciales
 		- Guardar configuracion en Web.Config: EmpresaEntities
 		- Selecionar Tablas > dbo
 
@@ -55,7 +55,9 @@ Para los datos de la BD:
 - Model class: tblEmpleados
 - Clase contexto de datos: Empresa
 - Generar vistas y use a layout page
-
+- Para hacer que se memuestre la seccion Empleados:
+	- Views/Shared/_Layout
+	- Agregar ActionLink: ""
 
 
 Otros:
@@ -63,3 +65,4 @@ Otros:
 	- Compartir archivos e imprsoras
 	- Enrutamiento y acceso remoto
 	- Escritorio remoto
+- Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion
