@@ -12,6 +12,8 @@ namespace RegistroEmpleados
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EmpresaEntities : DbContext
     {
@@ -26,5 +28,23 @@ namespace RegistroEmpleados
         }
     
         public virtual DbSet<tblEmpleados> tblEmpleados { get; set; }
+    
+        public virtual int PInsert(string nombre, string apellido)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("apellido", apellido) :
+                new ObjectParameter("apellido", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PInsert", nombreParameter, apellidoParameter);
+        }
+    
+        public virtual ObjectResult<Pselect_Result> Pselect()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pselect_Result>("Pselect");
+        }
     }
 }

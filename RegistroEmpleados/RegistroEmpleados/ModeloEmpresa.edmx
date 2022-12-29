@@ -13,6 +13,11 @@
           <Property Name="Nombres" Type="nvarchar" MaxLength="50" />
           <Property Name="Apellidos" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Function Name="PInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="apellido" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Pselect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="EmpresaModelStoreContainer">
           <EntitySet Name="tblEmpleados" EntityType="Self.tblEmpleados" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -30,7 +35,16 @@
         </EntityType>
         <EntityContainer Name="EmpresaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblEmpleados" EntityType="Self.tblEmpleados" />
+          <FunctionImport Name="PInsert">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pselect" ReturnType="Collection(EmpresaModel.Pselect_Result)" />
         </EntityContainer>
+        <ComplexType Name="Pselect_Result">
+          <Property Type="String" Name="Nombres" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -45,7 +59,24 @@
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="EmpresaModel.tblEmpleados">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EmpresaModel.Store.PInsert" >
+                  <ScalarProperty Name="Apellidos" ParameterName="apellido" />
+                  <ScalarProperty Name="Nombres" ParameterName="nombre" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PInsert" FunctionName="EmpresaModel.Store.PInsert" />
+          <FunctionImportMapping FunctionImportName="Pselect" FunctionName="EmpresaModel.Store.Pselect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmpresaModel.Pselect_Result">
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

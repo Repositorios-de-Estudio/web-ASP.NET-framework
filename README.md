@@ -47,8 +47,14 @@ Conexion a BD - SQLServer2019:
 		- Si, incluir datos confidenciales
 		- Guardar configuracion en Web.Config: EmpresaEntities
 		- Selecionar Tablas > dbo
-
-
+	- Verificar PInsert:
+		- El select se usó automaticamente
+		- En el controller tblEmpleadosController buscar Create()
+			- En db.tblEmpleados.Add(tblEmpleados); ir a la definicion de db.tblEmpleados.Add (esto lleva a Modelo.edmx/ModeloEmpresa.Context.cs)
+		- verificar que exista el metodo PInsert()
+		- En ObjectResult se puede ver que llama a Pselect
+	- Quitar Edit, Delete, Details de la vista:
+		- ir a Views/tblEmpleados > Index.cshtml > comentar los @Html.ActionLink(); >> <!-- -->
 
 Para los datos de la BD:
 - Controllers > Agregar nuevo controlador > MVC con Entity Framwork (esto genera el controlador y la vista)
@@ -62,7 +68,11 @@ Para los datos de la BD:
 			- Controlador: tblEmpleadosController
 		- <li>@Html.ActionLink("Empleados", "Index", "tblEmpleados")</li>
 	- Para actualizar la conexion se puede desde: ModeloEmpresa.edmx > Actualizar Modelo de base de datos
-
+- Agregar stored procedures:
+	- Actualizar conexion desde ModeloEmpresa.edmx
+	- Agregar > Funciones y procedimientos > Finalizar
+	- ModeloEmpresa.edmx > Asignacion de almacenamiento almacenado
+	- Funciones: Insertar mediante > buscar "PInsert" > Parametros > colocar los nombres de las variables
 Otros:
 - Firewall local: Permitir aplicacion:
 	- Compartir archivos e imprsoras
