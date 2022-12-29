@@ -29,7 +29,7 @@ namespace RegistroEmpleados
     
         public virtual DbSet<tblEmpleados> tblEmpleados { get; set; }
     
-        public virtual int PInsert(string nombre, string apellido)
+        public virtual int PInsert(string nombre, string apellido, string correo)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("nombre", nombre) :
@@ -39,7 +39,11 @@ namespace RegistroEmpleados
                 new ObjectParameter("apellido", apellido) :
                 new ObjectParameter("apellido", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PInsert", nombreParameter, apellidoParameter);
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PInsert", nombreParameter, apellidoParameter, correoParameter);
         }
     
         public virtual ObjectResult<Pselect_Result> Pselect()

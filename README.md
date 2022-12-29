@@ -80,3 +80,19 @@ Otros:
 	- Escritorio remoto
 - Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion, esto se puede ver en el conextion string
 	- <connectionStrings><add name="EmpresaEntities" connectionString="metadata=res://*/ModeloEmpresa.csdl|res://*/ModeloEmpresa.ssdl|res://*/ModeloEmpresa.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.20\SERVER\SQLEXPRESS,1433;initial catalog=Empresa;persist security info=True;user id=bduserX;password=admin1234;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
+	
+	
+	
+	Agregar Correos en la BD y en codigo
+	- Agregar Correos, not null, unique
+	- Actualizar los stored procedures
+	- Actualizar el modelo de vista desde ModeloEmpresa.edmx
+	- Actualizar almacenamientos almacenados > Insert > PInsert, agregar variable Correos
+	- Actualizar controlador Controllers/tblEmpleadosController
+		- Agregar campo Correos en Create(): public ActionResult Create([Bind(Include = "ID,Nombres,Apellidos,Correos")]
+	- Actualizar vistas
+		- Views/tblEmpleados/Index
+			- Agregar columna Correos en "Table" en la vista: <th>  @Html.DisplayNameFor(model => model.Correos) </th>
+			- Agregar en el foreach los correos: <td>     @Html.DisplayFor(modelItem => item.Correos)    </td>
+		- Views/tblEmpleados/Create
+			- Agregar información faltante entre <div class="form-group"> </div> para  model.Correos

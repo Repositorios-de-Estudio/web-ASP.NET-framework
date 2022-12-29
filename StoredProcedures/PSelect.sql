@@ -1,8 +1,9 @@
-CREATE PROCEDURE Pselect
+USE [Empresa]
+ALTER PROCEDURE [dbo].[Pselect]
 AS
 BEGIN
-	SELECT Nombres, Apellidos FROM [Empresa].[dbo].[tblEmpleados]
+	SELECT Nombres, Apellidos, Correos FROM [Empresa].[dbo].[tblEmpleados]
 END
 
-
+-- USE [Empresa]
 -- EXEC Pselect;
