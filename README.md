@@ -73,14 +73,7 @@ Para los datos de la BD:
 	- Agregar > Funciones y procedimientos > Finalizar
 	- ModeloEmpresa.edmx > Asignacion de almacenamiento almacenado
 	- Funciones: Insertar mediante > buscar "PInsert" > Parametros > colocar los nombres de las variables
-Otros:
-- Firewall local: Permitir aplicacion:
-	- Compartir archivos e imprsoras
-	- Enrutamiento y acceso remoto
-	- Escritorio remoto
-- Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion, esto se puede ver en el conextion string
-	- <connectionStrings><add name="EmpresaEntities" connectionString="metadata=res://*/ModeloEmpresa.csdl|res://*/ModeloEmpresa.ssdl|res://*/ModeloEmpresa.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.20\SERVER\SQLEXPRESS,1433;initial catalog=Empresa;persist security info=True;user id=bduserX;password=admin1234;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
-	
+
 	
 	
 Agregar Correos en la BD y en codigo
@@ -178,3 +171,15 @@ Fuente: https://www.c-sharpcorner.com/UploadFile/sourabh_mishra1/sending-an-e-ma
 </fieldset>
 ```
 
+- Agregar informacion adicional:
+	- Layout.cshtml: <li>@Html.ActionLink("Enviar Correo", "Index", "SendMail")</li>
+	- 
+
+Otros:
+- Firewall local: Permitir aplicacion:
+	- Compartir archivos e imprsoras
+	- Enrutamiento y acceso remoto
+	- Escritorio remoto
+- Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion, esto se puede ver en el conextion string
+	- <connectionStrings><add name="EmpresaEntities" connectionString="metadata=res://*/ModeloEmpresa.csdl|res://*/ModeloEmpresa.ssdl|res://*/ModeloEmpresa.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.20\SERVER\SQLEXPRESS,1433;initial catalog=Empresa;persist security info=True;user id=bduserX;password=admin1234;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
+	
