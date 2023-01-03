@@ -12,7 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombres" Type="nvarchar" MaxLength="50" />
           <Property Name="Apellidos" Type="nvarchar" MaxLength="50" />
-          <Property Name="Correos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correos" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Function Name="PInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
@@ -34,7 +34,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Correos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Correos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="EmpresaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblEmpleados" EntityType="Self.tblEmpleados" />

@@ -1,5 +1,4 @@
-USE [Empresa]
-ALTER PROCEDURE [dbo].[PInsert]
+CREATE PROCEDURE PInsert
 (
     @nombre nvarchar(50),
     @apellido nvarchar(50),
@@ -13,4 +12,4 @@ BEGIN
 END
 
 -- USE [Empresa]
--- EXEC PInsert @nombre = 'nombrecualquiera', @apellido = 'apellidocualquiera', @correo = 'cualquiera111@mail.com@correo';
+-- EXEC PInsert @nombre = 'nombrecualquiera', @apel

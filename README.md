@@ -35,7 +35,9 @@ Debe haber un equivalente de las clases de Controlles en Views:
 		- ID int - PK - identity
 		- Nombres: nvarchar(50)
 		- Apellidos: nvarchar(50)
-		
+		- Correos: nvarchar(5)
+
+	
 Conexion a BD - SQLServer2019:
 - Proyetco > Agregar > Nuevo elemento >> Datos >>ADO.NET Entity Data Model>> 1-EF Deigner desde base de datos
 	- Nueva conexion > Microsfot SQL Server 
@@ -180,6 +182,11 @@ Otros:
 	- Compartir archivos e imprsoras
 	- Enrutamiento y acceso remoto
 	- Escritorio remoto
+	- Sql server configuration manager:
+		- Protocols for SQLExpress > TCP/IP > Enable: Yes
+		- Protocols for SQLExpress > TCP/IP > IP Addresses >> IP ALL > TCP Dynamic Ports: <dejar en blanco>
+		- Protocols for SQLExpress > TCP/IP > IP Addresses >> IP ALL > TCP Port: 1433
+		- Protocols for SQLExpress > SQL Services > SQL Server >> restart
 - Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion, esto se puede ver en el conextion string
 	- <connectionStrings><add name="EmpresaEntities" connectionString="metadata=res://*/ModeloEmpresa.csdl|res://*/ModeloEmpresa.ssdl|res://*/ModeloEmpresa.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.20\SERVER\SQLEXPRESS,1433;initial catalog=Empresa;persist security info=True;user id=bduserX;password=admin1234;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
 	
