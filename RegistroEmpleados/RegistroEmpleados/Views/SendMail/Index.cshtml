@@ -14,13 +14,13 @@
     {
         @Html.ValidationSummary()
         <p>From: </p>
-        <p>@Html.TextBoxFor(model => model.From)</p>
+        <p>@Html.TextBoxFor(model => model.Desde)</p>
         <p>To: </p>
-        <p>@Html.TextBoxFor(model => model.To)</p>
+        <p>@Html.TextBoxFor(model => model.Hacia)</p>
         <p>Subject: </p>
-        <p>@Html.TextBoxFor(model => model.Subject)</p>
+        <p>@Html.TextBoxFor(model => model.Asunto)</p>
         <p>Body: </p>
-        <p>@Html.TextAreaFor(model => model.Body)</p>
+        <p>@Html.TextAreaFor(model => model.Cuerpo)</p>
         <input type="submit" value="Send" />
     }
 </fieldset>

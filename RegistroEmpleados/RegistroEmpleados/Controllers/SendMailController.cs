@@ -22,18 +22,21 @@ namespace RegistroEmpleados.Controllers
         {
             if (ModelState.IsValid)
             {
-                MailAddress desde = new MailAddress("FromAddress");
-                MailAddress hacia = new MailAddress("ToAddress");
+                // remitente divide el nombre de usuario del dominio
+                string[] remitente = mailWEB.Desde.Split('@');
+
+                MailAddress desde = new MailAddress(mailWEB.Desde);
+                MailAddress hacia = new MailAddress(mailWEB.Hacia);
                 MailMessage mensaje = new MailMessage(desde, hacia);
-                mensaje.Subject = "testmail";
-                mensaje.Body = "testmail";
+                mensaje.Subject = mailWEB.Asunto;
+                mensaje.Body = mailWEB.Cuerpo;
                 mensaje.IsBodyHtml = false;
                 SmtpClient client = new SmtpClient();
-                client.Port = ;
-                client.Host = "exchange server host address";
+                client.Port = 587;
+                client.Host = "192.168.0.20";
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential("username", "password", "domain");
+                client.Credentials = new NetworkCredential(remitente[0], "Contraseña1234", remitente[1]);
                 client.Send(mensaje);
 
                 return View("Index", mailWEB);
