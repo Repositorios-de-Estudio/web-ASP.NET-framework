@@ -95,15 +95,15 @@ Agregar Correos en la BD y en codigo
 Agregar funcionalidad enviar correos
 Fuente: https://www.c-sharpcorner.com/UploadFile/sourabh_mishra1/sending-an-e-mail-using-Asp-Net-mvc/
 
-- Nueva clase: Models/MailModel 
+- Nueva clase: Models/MailModel.cs
 
 ```
     public class MailModel
     {
-        public string From { get;set; }
-        public string To { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
+        public string Desde { get;set; }
+        public string Hacia { get; set; }
+        public string Asunto { get; set; }
+        public string Cuerpo { get; set; }
     }
 ```
 
@@ -116,15 +116,15 @@ Fuente: https://www.c-sharpcorner.com/UploadFile/sourabh_mishra1/sending-an-e-ma
         }
 
         [HttpPost]
-        public ViewResult Index(MailModel _objModelMail)
+        public ViewResult Index(MailModel mailWEB)
         {
             if (ModelState.IsValid)
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add(_objModelMail.To);
-                mail.From = new MailAddress(_objModelMail.From);
-                mail.Subject = _objModelMail.Subject;
-                string Body = _objModelMail.Body;
+                mail.To.Add(mailWEB.To);
+                mail.From = new MailAddress(mailWEB.From);
+                mail.Subject = mailWEB.Subject;
+                string Body = mailWEB.Body;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
@@ -134,7 +134,7 @@ Fuente: https://www.c-sharpcorner.com/UploadFile/sourabh_mishra1/sending-an-e-ma
                 smtp.Credentials = new System.Net.NetworkCredential("username", "password"); // Enter seders User name and password  
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
-                return View("Index", _objModelMail);
+                return View("Index", mailWEB);
             }
             else
             {
@@ -143,7 +143,45 @@ Fuente: https://www.c-sharpcorner.com/UploadFile/sourabh_mishra1/sending-an-e-ma
         }
 ```
 
-- Nueva vista: Views/SendMail - Vista MVC5 en blanco
+- CONFIGURACION PARA EXCHANGE SERVER 2019 con credenciales en codigo
+```
+        [HttpPost]
+        public ViewResult Index(MailModel mailWEB)
+        {
+            if (ModelState.IsValid)
+            {
+                // remitente divide el nombre de usuario del dominio
+                string[] remitente = mailWEB.Desde.Split('@');
+
+                MailAddress desde = new MailAddress(mailWEB.Desde);
+                MailAddress hacia = new MailAddress(mailWEB.Hacia);
+                MailMessage mensaje = new MailMessage(desde, hacia);
+                mensaje.Subject = mailWEB.Asunto;
+                mensaje.Body = mailWEB.Cuerpo;
+                mensaje.IsBodyHtml = false;
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.Host = "192.168.0.20";
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(remitente[0], "Contraseña1234", remitente[1]);
+                client.Send(mensaje);
+
+                return View("Index", mailWEB);
+            }
+            else
+            {
+                return View();
+            }
+        }
+```
+
+- CONFIGURACION PARA EXCHANGE SERVER 2019 con credenciales en Web.config
+```
+
+```
+
+- Nueva vista: Views/SendMail -->  Index - Vista MVC5 en blanco
 ```
 @model RegistroEmpleados.Models.MailModel
 
