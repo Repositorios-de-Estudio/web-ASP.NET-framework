@@ -227,4 +227,8 @@ Otros:
 		- Protocols for SQLExpress > SQL Services > SQL Server >> restart
 - Colocar la conexion de BD de datos con usuario y contraseña evita que falle la conexion, esto se puede ver en el conextion string
 	- <connectionStrings><add name="EmpresaEntities" connectionString="metadata=res://*/ModeloEmpresa.csdl|res://*/ModeloEmpresa.ssdl|res://*/ModeloEmpresa.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.20\SERVER\SQLEXPRESS,1433;initial catalog=Empresa;persist security info=True;user id=bduserX;password=admin1234;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
-	
+
+
+
+
+Fuente smtp: https://social.msdn.microsoft.com/forums/en-US/4316dc21-977a-47cf-ab32-cc696e2c62e1/sending-mail-over-exchange-server-with-c-aspnet?forum=aspwebforms
