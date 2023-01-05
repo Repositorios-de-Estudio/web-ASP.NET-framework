@@ -14,6 +14,9 @@
           <Property Name="Apellidos" Type="nvarchar" MaxLength="50" />
           <Property Name="Correos" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Function Name="PDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="PInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
           <Parameter Name="apellido" Type="nvarchar" Mode="In" />
@@ -44,6 +47,9 @@
             <Parameter Name="correo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Pselect" ReturnType="Collection(EmpresaModel.Pselect_Result)" />
+          <FunctionImport Name="PDelete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Pselect_Result">
           <Property Type="String" Name="Nombres" Nullable="true" MaxLength="50" />
@@ -71,6 +77,9 @@
                   <ScalarProperty Name="Apellidos" ParameterName="apellido" />
                   <ScalarProperty Name="Nombres" ParameterName="nombre" />
                 </InsertFunction>
+                <DeleteFunction FunctionName="EmpresaModel.Store.PDelete" >
+                  <ScalarProperty Name="ID" ParameterName="id" />
+                </DeleteFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -83,6 +92,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PDelete" FunctionName="EmpresaModel.Store.PDelete" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

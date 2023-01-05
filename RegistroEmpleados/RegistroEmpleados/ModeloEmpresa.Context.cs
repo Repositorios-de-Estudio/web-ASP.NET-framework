@@ -50,5 +50,14 @@ namespace RegistroEmpleados
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pselect_Result>("Pselect");
         }
+    
+        public virtual int PDelete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PDelete", idParameter);
+        }
     }
 }

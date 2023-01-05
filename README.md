@@ -82,7 +82,7 @@ Agregar Correos en la BD y en codigo
 - Agregar Correos, not null, unique
 - Actualizar los stored procedures
 - Actualizar el modelo de vista desde ModeloEmpresa.edmx
-- Actualizar almacenamientos almacenados > Insert > PInsert, agregar variable Correos
+- Actualizar almacenamientos almacenados > Insert > PInsert > PDelete, agregar variables
 - Actualizar controlador Controllers/tblEmpleadosController
 	- Agregar campo Correos en Create(): public ActionResult Create([Bind(Include = "ID,Nombres,Apellidos,Correos")]
 - Actualizar vistas

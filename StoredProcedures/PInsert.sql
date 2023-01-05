@@ -12,4 +12,4 @@ BEGIN
 END
 
 -- USE [Empresa]
--- EXEC PInsert @nombre = 'nombrecualquiera', @apel
+-- EXEC PInsert @nombre = 'nombre1', @apellido = 'apellido1', @correo = 'correo1@lol.com';
